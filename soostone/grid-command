@@ -1,0 +1,2 @@
+docker run -d --name selenium-grid -p 4444:4444 selenium/standalone-chrome
+
