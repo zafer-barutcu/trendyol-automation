@@ -1,10 +1,15 @@
 # Soostone QA Assignment Fresh Install
 1.Install IntelliJ Community Edition. You can purchase the full version, but the Community Edition is free (including commercial development), 
 and none of the additional functionality is a hard requirement.
-2.Clone the project somewhere. Assuming you already have your git set up, `mkdir -p ~/src/soostone`, then `git clone git@github.com:zafer-barutcu/trendyol-automation.git ~/src/soostone
+
+2.Clone the project somewhere. Assuming you already have your git set up, `mkdir -p ~/src/soostone`, then `git clone https://github.com/zafer-barutcu/trendyol-automation.git ~/src/soostone
+
 3.In IntelliJ, open the project. Import maven dependencies
+
 4.In the top right corner, you should see a "Select SDK" button. Click this, select "Download SDK", version 17, Azul Zulu Community.
+
 5.If you get a message about shared indices, say "Always Download"
+
 6.At this point, things should at least be able to compile and run (not necessarily successfully).
 
 ## Running locally
