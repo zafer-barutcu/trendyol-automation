@@ -50,40 +50,51 @@ public class DriverFactory {
             case "chrome":
             default:
                 ChromeOptions chromeOptions = new ChromeOptions();
-                if (headless) {
-                    chromeOptions.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
-                }
-                else {
-                    chromeOptions.addArguments("--start-maximized");
-                }
-                return new RemoteWebDriver(gridUrl, chromeOptions);
-        }
-    }
-
-    private WebDriver createLocalDriver(String browser, boolean headless) {
-        switch (browser) {
-            case "firefox":
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                if (headless) firefoxOptions.addArguments("--headless");
-                return new org.openqa.selenium.firefox.FirefoxDriver(firefoxOptions);
-
-            case "edge":
-                EdgeOptions edgeOptions = new EdgeOptions();
-                return new org.openqa.selenium.edge.EdgeDriver(edgeOptions);
-
-            case "chrome":
-            default:
-                ChromeOptions chromeOptions = new ChromeOptions();
                 Map<String, Object> prefs = new HashMap<>();
-                prefs.put("profile.default_content_setting_values.notifications", 2); // 2 = block
+                prefs.put("profile.default_content_setting_values.notifications", 2);
                 chromeOptions.setExperimentalOption("prefs", prefs);
                 if (headless) {
                     chromeOptions.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
+                    } else {
+                        chromeOptions.addArguments("--start-maximized",
+                                "--no-sandbox",
+                                "--disable-dev-shm-usage",
+                                "--disable-gpu",
+                                "--window-size=1920,1080",
+                                "--disable-extensions",
+                                "--remote-allow-origins=*",
+                                "--disable-popup-blocking",
+                                "--disable-infobars");
+                    }
+                    return new RemoteWebDriver(gridUrl, chromeOptions);
                 }
-                else {
-                    chromeOptions.addArguments("--start-maximized");
-                }
-                return new ChromeDriver(chromeOptions);
+        }
+
+
+        private WebDriver createLocalDriver (String browser,boolean headless){
+            switch (browser) {
+                case "firefox":
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    if (headless) firefoxOptions.addArguments("--headless");
+                    return new org.openqa.selenium.firefox.FirefoxDriver(firefoxOptions);
+
+                case "edge":
+                    EdgeOptions edgeOptions = new EdgeOptions();
+                    return new org.openqa.selenium.edge.EdgeDriver(edgeOptions);
+
+                case "chrome":
+                default:
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    Map<String, Object> prefs = new HashMap<>();
+                    prefs.put("profile.default_content_setting_values.notifications", 2); // 2 = block
+                    chromeOptions.setExperimentalOption("prefs", prefs);
+                    if (headless) {
+                        chromeOptions.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
+                    } else {
+                        chromeOptions.addArguments("--start-maximized");
+                    }
+                    return new ChromeDriver(chromeOptions);
+            }
         }
     }
-}
+
