@@ -1,3 +1,4 @@
+@productsearch
 Feature: Trendyol website - product search, add to cart, and remove from cart
 
   Scenario: Search for a product and perform full cart operations
