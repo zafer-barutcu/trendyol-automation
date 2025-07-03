@@ -33,7 +33,9 @@ import org.slf4j.LoggerFactory;
 public class BaseTextContext extends BasePage {
 
     private static final Logger log = LoggerFactory.getLogger(BaseTextContext.class);
-    @FindBy(css = "div.basket-item-count-container.visible")
+
+    //@FindBy(css = "div.basket-item-count-container.visible")
+    @FindBy(css = "div.basket-item-count")
     protected WebElement cartItemCount;
     protected final By productSearchBox = By.cssSelector("input[data-testid='suggestion']");
     protected final By productSearch = By.cssSelector("i[data-testid='search-icon']");
@@ -94,7 +96,7 @@ public class BaseTextContext extends BasePage {
 
         wait.until(driver -> {
             try {
-                scrollToElement(cartItemCount);  // 🔁 Senin scroll helper'ı
+                scrollToElement(cartItemCount);
                 String text = cartItemCount.getText().trim();
                 int count = Integer.parseInt(text);
                 return count >= expectedCount;

@@ -18,7 +18,9 @@ public class MyCartPage extends BaseTextContext {
 
     private final By myCartPageHeader = By.xpath("//div[contains(@class, 'pb-header') and contains(text(), 'Sepetim')]");
     private final By closeLocatorPopUp = By.xpath("//button[contains(text(), 'Anladım')]");
-    private final By itemNameInCart = By.cssSelector(".pb-basket-item .pb-basket-item-details > a > p");
+
+    //private final By itemNameInCart = By.cssSelector(".pb-basket-item .pb-basket-item-details > a > p");
+    private final By itemNameInCart = By.cssSelector("p.pb-item");
     private final By itemPriceInCart = By.cssSelector(".pb-basket-item-price");
     private final By itemQuantityInCart = By.xpath("//input[contains(@class,'counter-content') and @aria-label='Ürün adedi']");
     private final By increaseItemQuantityButton = By.xpath("//button[@aria-label='Ürün adedi arttırma']");

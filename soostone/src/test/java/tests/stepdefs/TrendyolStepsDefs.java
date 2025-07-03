@@ -72,8 +72,8 @@ public class TrendyolStepsDefs {
     @When("I add the selected product to the cart")
     public void iAddTheSelectedProductToTheCart() {
         log.info("Adding selected product to cart");
-        expected = productDetailPage.getProductDetails(); // store before leaving
-        productDetailPage.addToCart();
+        expected = productDetailPage.getProductDetails();
+        productDetailPage.addToCartFromDetailPage();
         productDetailPage.verifyProductAddedToCart();
         productDetailPage.goToCartPage();
         log.info("Navigated to cart page");
@@ -86,8 +86,8 @@ public class TrendyolStepsDefs {
         myCartPage.checkAndDismissIfLocatorPopupInCartPageIsVisible();
         actual = myCartPage.getProductDetails();
         assertTrue("Product name mismatch!",
-                ((String) actual.get(NAME)).toLowerCase()
-                        .contains(((String) expected.get(NAME)).toLowerCase()));
+                ((String) actual.get(NAME)).replaceAll("\\s+","").toLowerCase()
+                        .contains(((String) expected.get(NAME)).replaceAll("\\s+", "").toLowerCase()));
 
         assertEquals("Price mismatch", expected.get(PRICE), actual.get(PRICE));
 

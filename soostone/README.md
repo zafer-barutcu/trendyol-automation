@@ -14,46 +14,55 @@ and none of the additional functionality is a hard requirement.
 
 ## Running locally
 To run locally and generate extend-HTML reports, you can either use maven goal *verify* or *test* with optional *clean* command. Clean command removes target folder of previous build(s).
-Or use run button in TestRunner class or in feature file  HTML reports should be generated under reports/extend-report.html
+Or use run button in TestRunner class or in feature file.  HTML reports should be generated under.. reports/extend-report.html
 ```
 mvn clean verify
 or
 mvn clean test
 ```
 ## Browsers
-You can define the browser either in ConfigReader file or using command line argument BROWSER
+You can define the browser in config.properties file
 ```
-mvn test -DBROWSER=firefox
+browser=chrome
+```
+
+## Concurrent Run
+Enable in pom.xml
 
 ```
-## Tags
-You can pass a custom tag using terminal. Only available tag is **@productsearch**. You can add additional tags for additional tests based on your needs
+<parallel>methods</parallel>
+<threadCount>4</threadCount>
+```
 
-```
-mvn test -Dcucumber.filter.tags="@productsearch"
-```
 ## Selenium Grid
 In order to simulate Selenium Grid infrastructure in local, Docker desktop should be installed in local
+
 1.Do **remote=true** in config.properties
+
 2.Open Docker Desktop
+
 3.Open terminal and execute command in **grid-command** file
 ```
 docker run -d --name selenium-grid -p 4444:4444 selenium/standalone-chrome
 ```
 4.Check container is up and running
+
 4.Run the test
+
 5.Open http://localhost:4444/ui
-6.You should see
-7.You can watch the execution by clicking camera icon.
-8.If password prompted **password=secret**
+
+6.You can watch the execution by clicking camera icon.
+
+7.If password prompted **password=secret**
 
 ## Headless Mode in Docker
-Even if you do not configure headless in the config.properties file, 
-it will be overridden by the Docker container since the following Maven command is automatically executed inside the container:
+Even if you do not configure headless in the config.properties file,
+it will be automatically overridden inside the Docker container because the following Maven command runs by default:
 ```
 mvn clean test -Dheadless=true -Dbrowser=chrome
 ```
-Build Docker image
+Build Docker image:
+First, change directory to the folder where pom.xml is located:
 ```
 docker build -t trendyol -f soostone/Dockerfile .
 ```
@@ -63,4 +72,7 @@ docker run --rm trendyol
 ```
 Test reports are generated inside the container under /app/target
 To copy them to your host machine:
-docker run --rm -v $(pwd)/test-reports:/app/target my-selenium-tests
+```
+docker run --rm -v "$(pwd)/docker-headless-reports:/app/target" trendyol
+```
+
