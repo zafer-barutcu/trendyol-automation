@@ -63,24 +63,3 @@ docker run -d --name selenium-grid -p 4444:4444 selenium/standalone-chrome
 
 7.If password prompted **password=secret**
 
-## Headless Mode in Docker
-Even if you do not configure headless in the config.properties file,
-it will be automatically overridden inside the Docker container because the following Maven command runs by default:
-```
-mvn clean test -Dheadless=true -Dbrowser=chrome
-```
-Build Docker image:
-First, change directory to the folder where pom.xml is located:
-```
-docker build -t trendyol -f soostone/Dockerfile .
-```
-Run the Test:
-```
-docker run --rm trendyol
-```
-Test reports are generated inside the container under /app/target
-To copy them to your host machine:
-```
-docker run --rm -v "$(pwd)/docker-headless-reports:/app/target" trendyol
-```
-
