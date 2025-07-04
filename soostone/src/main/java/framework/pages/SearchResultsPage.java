@@ -1,6 +1,7 @@
 package framework.pages;
 
 import framework.context.BaseTextContext;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -9,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-
-import static framework.utils.CustomBy.buttonText;
 import static framework.utils.CustomBy.searchResultPrice;
 
 public class SearchResultsPage extends BaseTextContext {
@@ -18,6 +17,8 @@ public class SearchResultsPage extends BaseTextContext {
     private static final Logger log = LoggerFactory.getLogger(ProductDetailPage.class);
     @FindBy(css = "div.p-card-wrppr.with-campaign-view.add-to-bs-card")
     protected List<WebElement> productCards;
+    private final By addToCartBtnFromSearchResult = By.cssSelector("div.add-to-bs-tx");
+
 
     public boolean areSearchResultsDisplayed() {
         return productCards.size() > 0;
@@ -37,6 +38,7 @@ public class SearchResultsPage extends BaseTextContext {
         return matchCount > 0;
     }
 
+
     private String selectedProductName;
     private String selectedProductPrice;
     private boolean isSelectedProductAvailable;
@@ -52,7 +54,7 @@ public class SearchResultsPage extends BaseTextContext {
                 selectedProductPrice = priceElement.getText().trim();
 
                 try {
-                    WebElement addToCartButton = card.findElement(buttonText("Sepete Ekle"));
+                    WebElement addToCartButton = card.findElement(addToCartBtnFromSearchResult);
                     isSelectedProductAvailable = addToCartButton.isEnabled();
                 } catch (NoSuchElementException e) {
                     isSelectedProductAvailable = false;
@@ -75,6 +77,4 @@ public class SearchResultsPage extends BaseTextContext {
     public Map<ProductField, Object> getSelectedProductDetails() {
         return getProductDetails(selectedProductName, selectedProductPrice, isSelectedProductAvailable);
     }
-
-
 }

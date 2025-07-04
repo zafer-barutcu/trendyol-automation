@@ -12,16 +12,9 @@ import java.util.stream.Collectors;
 public final class CustomBy {
 
     private CustomBy(){}
+
     public static By xpathOr(@Language("XPath") String... xpaths) {
         return By.xpath(Arrays.stream(xpaths).collect(Collectors.joining(" | ", "(", ")")));
-    }
-
-    public static By buttonText(String buttonText) {
-        return xpathOr(
-                ".//button[normalize-space(text())='" + buttonText + "' or normalize-space(.)='" + buttonText + "']",
-                ".//a[(contains(@class, 'button') or contains(@class, 'btn')) and (normalize-space(text())='" + buttonText + "' or normalize-space(.)='" + buttonText + "')]",
-                ".//button[.//*[normalize-space(text())='" + buttonText + "']]"
-        );
     }
 
     public static By searchResultPrice() {
