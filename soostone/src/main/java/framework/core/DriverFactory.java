@@ -35,7 +35,7 @@ public class DriverFactory {
     }
 
     private WebDriver createRemoteDriver(String browser, boolean headless) throws MalformedURLException {
-        URL gridUrl = new URL(ConfigReader.get("grid.url")); // config.properties içinden URL çekiyoruz
+        URL gridUrl = new URL(ConfigReader.get("grid.url"));
 
         switch (browser) {
             case "firefox":
@@ -58,13 +58,7 @@ public class DriverFactory {
                     } else {
                         chromeOptions.addArguments("--start-maximized",
                                 "--no-sandbox",
-                                "--disable-dev-shm-usage",
-                                "--disable-gpu",
-                                "--window-size=1920,1080",
-                                "--disable-extensions",
-                                "--remote-allow-origins=*",
-                                "--disable-popup-blocking",
-                                "--disable-infobars");
+                                "--disable-dev-shm-usage");
                     }
                     return new RemoteWebDriver(gridUrl, chromeOptions);
                 }
@@ -86,7 +80,7 @@ public class DriverFactory {
                 default:
                     ChromeOptions chromeOptions = new ChromeOptions();
                     Map<String, Object> prefs = new HashMap<>();
-                    prefs.put("profile.default_content_setting_values.notifications", 2); // 2 = block
+                    prefs.put("profile.default_content_setting_values.notifications", 2);
                     chromeOptions.setExperimentalOption("prefs", prefs);
                     if (headless) {
                         chromeOptions.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");

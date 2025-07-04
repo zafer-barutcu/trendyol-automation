@@ -5,7 +5,6 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import framework.core.DriverFactory;
 import framework.core.ThreadLocalDriver;
-import framework.pages.ProductDetailPage;
 import framework.utils.ConfigReader;
 import framework.utils.ExtentManager;
 import framework.utils.ExtentTestManager;
