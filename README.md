@@ -1,4 +1,8 @@
-# Soostone QA Assignment Fresh Install
+# Soostone QA Assignment - Trendyol Automation
+
+This project contains automated test cases for Trendyol's web application, built with Java, Selenium, Maven, and Cucumber.
+
+# Fresh Install
 1.Install IntelliJ Community Edition. You can purchase the full version, but the Community Edition is free (including commercial development), 
 and none of the additional functionality is a hard requirement.
 
@@ -13,21 +17,25 @@ and none of the additional functionality is a hard requirement.
 6.At this point, things should at least be able to compile and run (not necessarily successfully).
 
 ## Running locally
-To run locally and generate extend-HTML reports, you can either use maven goal *verify* or *test* with optional *clean* command. Clean command removes target folder of previous build(s).
-Or use run button in TestRunner class or in feature file.  HTML reports should be generated under.. reports/extend-report.html
+To run tests locally and generate Extent HTML reports, use Maven commands:
 ```
 mvn clean verify
 or
 mvn clean test
 ```
-## Browsers
-You can define the browser in config.properties file
+Reports will be generated at : reports/extent-report.html
+
+Alternatively, you can run tests via IntelliJ:
+Click the Run button in TestRunner class or directly from feature files.
+
+## Browser Configuration
+Set browser type in the config.properties file:
 ```
 browser=chrome
 ```
 
-## Concurrent Run
-Enable in pom.xml
+## Running Tests Concurrently
+Enable parallel test execution in pom.xml:
 
 ```
 <parallel>methods</parallel>
